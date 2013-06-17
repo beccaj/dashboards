@@ -1,0 +1,40 @@
+
+
+
+<!--script type='text/javascript'>
+$(function() {
+Dashing.gridsterLayout('[{"col":1,"row":1,"size_x":3,"size_y":1},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":2,"row":2,"size_x":1,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":1},{"col":1,"row":2,"size_x":1,"size_y":1}]')
+});
+</script-->
+
+
+<% content_for(:title) { "1080p dashboard" } %>
+
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="3" data-sizey="1">
+      <div data-view="MyWidget" data-id="my_widget"></div>
+      <i class="icon-cog icon-background"></i>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Clock"></div>
+      <i class="icon-time icon-background"></i>
+    </li>
+
+
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="klimato" data-view="Klimato"></div>
+    </li>    
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="aww" data-view="RandomAww"></div>
+    </li>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="thejob" data-view="JenkinsBuild" data-title="BUILD" data-min="0" data-max="100"></div>
+    </li>
+  </ul>
+  <center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>
+</div>
