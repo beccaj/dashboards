@@ -21,7 +21,7 @@ class Dashing.Feed extends Dashing.Widget
   nextHeadline: =>
     headlines = @get('headlines')
     if headlines
-      @feedElem.fadeOut
+      @feedElem.fadeOut 400
       @currentIndex = (@currentIndex + 1) % headlines.length
       @set 'current_headline', headlines[@currentIndex]
-      @feedElem.fadeIn()  
+      @feedElem.fadeIn 800   
