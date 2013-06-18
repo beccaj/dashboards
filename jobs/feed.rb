@@ -44,13 +44,14 @@ SCHEDULER.every '10m', first_in: 0 do |job|
 		new_data[title] = descr
 
 	end
-
+	
+	puts "Sent data"
+	send_event( 'feed', {new_data: new_data, title: "In the Community", headlines: headlines, headline: headline} )
 end
 
 
 
 	
-SCHEDULER.every '30s', first_in: 0 do |job|
-	puts "Sent data"
-	send_event( 'feed', {new_data: new_data, title: "In the Community", headlines: headlines, headline: headline} )
+SCHEDULER.every '5m', first_in: 0 do |job|
+
 end

@@ -18,10 +18,15 @@ class Dashing.Feed extends Dashing.Widget
   startCarousel: ->
     setInterval(@nextHeadline, 8000)
 
+  fade_func: ->
+    @currentIndex = (@currentIndex + 1) % headlines.length
+    @set 'current_headline', headlines[@currentIndex]
+    @feedElem.fadeIn 800   
+
   nextHeadline: =>
     headlines = @get('headlines')
     if headlines
-      @feedElem.fadeOut 400
+      #@feedElem.fadeOut(400, @fade_func)
       @currentIndex = (@currentIndex + 1) % headlines.length
       @set 'current_headline', headlines[@currentIndex]
-      @feedElem.fadeIn 800   
+      #@feedElem.fadeIn 800   
