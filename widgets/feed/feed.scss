@@ -1,0 +1,85 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+//$background-color:  #A044ff;
+$background-color: #111;
+$title-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.3);
+//$tick-color:        rgba(0, 0, 0, 0.4);
+$tick-color:        rgba(255, 255, 255, .8);
+$slice-font-size: 20px; //20px; //20
+$title-font-size: 30px; //30px;  
+
+// ----------------------------------------------------------------------------
+// Widget-feed styles
+// ----------------------------------------------------------------------------
+.widget-feed {
+
+  background-color: $background-color;
+  position: relative;
+  padding: 6px 12px;
+
+  .widget {
+    vertical-align: top;
+    padding: 6px 12px;
+  }
+
+  .headline {
+    color: #f80;
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 12px;
+
+    a {
+      color: #f80;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+  .slice {
+    font-size: $slice-font-size;
+    font-weight: 600;
+
+  }
+
+  svg {
+   position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  .title, .value {
+   /* position: absolute;
+    z-index: -10000;*/
+  }
+
+  .title {
+    color: $title-color;
+  }
+
+  h1.title {
+    color: $title-color;
+    font-size: $title-font-size;
+  }
+
+  .more-info {
+    color: $moreinfo-color;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 0;
+  }
+
+
+
+  .domain {
+    display: none;
+  }
+}
+
+
