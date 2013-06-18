@@ -9,7 +9,8 @@ require 'rexml/document'
 url = "http://community.spiceworks.com/feed/global.rss"
 
 new_data = {}
-headlines = ""
+headlines = []
+headline = "Headline!!!"
 
 SCHEDULER.every '10m', first_in: 0 do |job|
 	puts "about to get xml"
@@ -25,6 +26,10 @@ SCHEDULER.every '10m', first_in: 0 do |job|
 		elems = item.elements
 		title = elems['title'].text
 		descr = elems['description'].text
+		link = elems['link'].text
+
+
+		title = "<a href='#{link}'>#{title}</a>"
 
 		puts "\nTitle: #{title}"
 		puts "Description: #{descr[0, 50]}"
@@ -32,12 +37,12 @@ SCHEDULER.every '10m', first_in: 0 do |job|
 		limit = 500
 
 		ellips = descr.length > limit ? " ..." : ""
-		headlines << "<span class='headline'>#{title}</span></br><span class='description'>#{descr[0,limit]}#{ellips}</span></br>"
+		# headlines << "<span class='headline'>#{title}</span></br><span class='description'>#{descr[0,limit]}#{ellips}</span></br>"
+
+		headlines << {headline: title, description: descr}
 
 		new_data[title] = descr
-		# item.elements.each do |elem|
-			# puts "Elem: #{elem.text}"
-		# end
+
 	end
 
 end
@@ -45,6 +50,7 @@ end
 
 
 	
-SCHEDULER.every '2s', first_in: 0 do |job|
-	send_event( 'feed', {new_data: new_data, title: "Spiceworks Headlines", headlines: headlines} )
+SCHEDULER.every '30s', first_in: 0 do |job|
+	puts "Sent data"
+	send_event( 'feed', {new_data: new_data, title: "In the Community", headlines: headlines, headline: headline} )
 end

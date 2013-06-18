@@ -23,6 +23,9 @@ $title-font-size: 30px; //30px;
     vertical-align: top;
     padding: 6px 12px;
   }
+  a:hover {
+    text-decoration: underline;
+  }  
 
   .headline {
     color: #f80;
@@ -36,9 +39,7 @@ $title-font-size: 30px; //30px;
       color: #f80;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+
 
   }
 

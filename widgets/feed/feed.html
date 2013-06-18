@@ -1,2 +1,11 @@
-<h1 class='title' data-bind='title' ></h1>
-<div data-bind='headlines | raw'></div>
+<h1 class="title" data-bind="title"></h1>
+<!--div class="feed-container">
+  <h3><span data-bind='headline' class="headline"></span></h3>
+  <p class="description" data-bind='description | raw'></p>
+</-->
+
+<div class="feed-container">
+	<div class = "headline" data-bind='headline | raw'></div>
+	<div class = "description" data-bind='description | raw'></div>
+</div>
+<!--p class="more-info" data-bind="moreinfo | raw"></p-->

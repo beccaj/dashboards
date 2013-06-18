@@ -1,27 +1,27 @@
 class Dashing.Feed extends Dashing.Widget
-  
-
-  
-
-
+  @accessor 'description', ->
+    "#{@get('current_headline')?.description}"
+  @accessor 'headline', ->
+    "#{@get('current_headline')?.headline}"
 
   ready: ->
-
-
-
+    @currentIndex = 0
+    @feedElem = $(@node).find('.feed-container')
+    @nextHeadline()
+    @startCarousel()
 
   onData: (data) ->
-	#headlinestr = ""
-
-	#for key, value of data.new_data
-	#  headlinestr = headlinestr + key + value
-
-    #@set('headlines', headlinestr)
-
-    #@set('headlines', data.headlines)
-
-    #@set('title', data.title)
+    @currentIndex = 0
 
 
-  
 
+  startCarousel: ->
+    setInterval(@nextHeadline, 8000)
+
+  nextHeadline: =>
+    headlines = @get('headlines')
+    if headlines
+      @feedElem.fadeOut
+      @currentIndex = (@currentIndex + 1) % headlines.length
+      @set 'current_headline', headlines[@currentIndex]
+      @feedElem.fadeIn()  
