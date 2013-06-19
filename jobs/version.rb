@@ -5,7 +5,7 @@ require 'rubygems'
 require 'nokogiri'     
 
 new_data = {}
-SCHEDULER.every '2h', first_in: 0 do |job|
+SCHEDULER.every '12h', first_in: 0 do |job|
 	url = "http://spiceworksdata/stats/versions"
 	page = Nokogiri::HTML(open(url))   
 

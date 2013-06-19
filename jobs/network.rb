@@ -13,7 +13,7 @@ i = 1
 @graph_data = []
 file_string = ""
 
-SCHEDULER.every '2h', first_in: 0 do |job|
+SCHEDULER.every '12h', first_in: 0 do |job|
 	url = 'http://spiceworksdata/users/users_by_country_and_network_size'
 
 	open (url) do |f|

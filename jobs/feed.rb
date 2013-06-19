@@ -1,8 +1,4 @@
-require 'open-uri'
-require 'csv'
-require 'set'
-require 'rubygems'
-require 'nokogiri'  
+require 'open-uri' 
 require 'net/http'
 require 'rexml/document'   
 
@@ -12,46 +8,41 @@ new_data = {}
 headlines = []
 headline = "Headline!!!"
 
-SCHEDULER.every '10m', first_in: 0 do |job|
-	puts "about to get xml"
+SCHEDULER.every '1m', first_in: 0 do |job|
 	xml_data = Net::HTTP.get_response(URI.parse(url)).body
 	doc = REXML::Document.new(xml_data)
-	puts "got xml"
 	titles = []
 	descriptions = []
+	block = ""
 
+	num_items = 5
 
-	doc.elements.each("rss/channel/item") do |item|
-		# puts "Item: #{item.text}"
+	doc.elements.each_with_index("rss/channel/item") do |item, index|
 		elems = item.elements
 		title = elems['title'].text
 		descr = elems['description'].text
 		link = elems['link'].text
 
+		date = elems['pubDate'].text
+		date.gsub!(/:\d\d [\+-]\d\d\d\d/, "")
 
 		title = "<a href='#{link}'>#{title}</a>"
-
-		puts "\nTitle: #{title}"
-		puts "Description: #{descr[0, 50]}"
-
-		limit = 500
+		limit = 100
 
 		ellips = descr.length > limit ? " ..." : ""
-		# headlines << "<span class='headline'>#{title}</span></br><span class='description'>#{descr[0,limit]}#{ellips}</span></br>"
+		block << "<span class='description'>#{date}</span></br><span class='headline'>#{title}</span></br><span class='description'>#{descr[0,limit]}#{ellips}</span></br></br></br>"
+
 
 		headlines << {headline: title, description: descr}
 
 		new_data[title] = descr
 
+		if index >= num_items - 1
+			break
+		end
+
+
 	end
 	
-	puts "Sent data"
-	send_event( 'feed', {new_data: new_data, title: "In the Community", headlines: headlines, headline: headline} )
-end
-
-
-
-	
-SCHEDULER.every '5m', first_in: 0 do |job|
-
+	send_event( 'feed', {new_data: new_data, title: "In the Community", headlines: headlines, block: block} )
 end
